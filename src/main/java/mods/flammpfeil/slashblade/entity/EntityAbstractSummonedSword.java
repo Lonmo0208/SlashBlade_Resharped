@@ -595,7 +595,7 @@ public class EntityAbstractSummonedSword extends Projectile implements IShootabl
         return ProjectileUtil.getEntityHitResult(this.level(), this, p_213866_1_, p_213866_2_,
                 this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), (entity) -> {
                     return entity.canBeHitByProjectile()
-                            && (entity != this.getShooter() || this.ticksInAir >= 5)
+                            && (entity != this.getShooter() || this.ticksInAir >= 10)
                             && (this.alreadyHits == null || !this.alreadyHits.contains(entity.getId()));
                 });
     }
