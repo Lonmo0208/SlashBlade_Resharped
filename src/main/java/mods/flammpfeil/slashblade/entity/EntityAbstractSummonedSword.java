@@ -340,36 +340,6 @@ public class EntityAbstractSummonedSword extends Projectile implements IShootabl
                 movedVec = raytraceresult.getLocation();
             }
 
-            while (this.isAlive()) {
-                // todo : replace TargetSelector
-                EntityHitResult entityraytraceresult = this.getRayTrace(positionVec, movedVec);
-                if (entityraytraceresult != null) {
-                    raytraceresult = entityraytraceresult;
-                }
-
-                if (raytraceresult != null && raytraceresult.getType() == HitResult.Type.ENTITY) {
-                    Entity entity = ((EntityHitResult) raytraceresult).getEntity();
-                    Entity entity1 = this.getShooter();
-                    if (entity instanceof Player && entity1 instanceof Player
-                            && !((Player) entity1).canHarmPlayer((Player) entity)) {
-                        raytraceresult = null;
-                        entityraytraceresult = null;
-                    }
-                }
-
-                if (raytraceresult != null && !(disallowedHitBlock && raytraceresult.getType() == HitResult.Type.BLOCK)
-                        && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
-                    this.onHit(raytraceresult);
-                    this.hasImpulse = true;
-                }
-
-                if (entityraytraceresult == null || this.getPierce() <= 0) {
-                    break;
-                }
-
-                raytraceresult = null;
-            }
-
             motionVec = this.getDeltaMovement();
             double mx = motionVec.x;
             double my = motionVec.y;
